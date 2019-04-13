@@ -8,6 +8,8 @@ var Concert = require("codingbootcamp");
 
 var keys = require("./keys.js");
 
+var fs = require("fs");
+
 var command = process.argv[2];
 var query = process.argv.slice(3).join(" ");
 console.log(command);
@@ -46,8 +48,11 @@ if (command === "spotify-this") {
     console.log("running-movie");
 
 } else (command === "do-what-it-says") {
-
-}
+    fs.readFile("random.txt", "utf8", function (err, data) {
+        if (err) {
+            return console.log(err);
+        }
+    }
 
 
 
