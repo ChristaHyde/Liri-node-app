@@ -3,15 +3,15 @@ Homework Assignment #8
 
 1. When the user types in the command line -- node liri.js concert-this and an artist
 This information will be populated:
-     * Name of the venue
+   * Name of the venue
 
-     * Venue location
+   * Venue location
 
-     * Date of the Event (use moment to format this as "MM/DD/YYYY")
+   * Date of the Event (use moment to format this as "MM/DD/YYYY")
 
 2. When the user types in the command line -- node liri.js spotify-this-song
 This information will be populated:
-   * Artist(s)
+  * Artist(s)
 
      * The song's name
 
