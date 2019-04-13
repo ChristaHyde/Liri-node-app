@@ -28,7 +28,12 @@ if (command === "spotify-this") {
 } else if (command === "concert-this") {
     console.log("running-concert");
     queryURL("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
-        .then()
+        .then(function (response) {
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
 } else if (command === "movie-this") {
     axios.get('http://www.omdbapi.com/?apikey=trilogy&t=' + query)
@@ -39,6 +44,9 @@ if (command === "spotify-this") {
             console.log(error);
         });
     console.log("running-movie");
+
+} else (command === "do-what-it-says") {
+
 }
 
 
