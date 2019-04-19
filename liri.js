@@ -4,16 +4,12 @@ var axios = require("axios");
 
 var Spotify = require('node-spotify-api');
 
-var Concert = require("codingbootcamp");
-
 var keys = require("./keys.js");
 
 var fs = require("fs");
 
 var command = process.argv[2];
 var query = process.argv.slice(3).join(" ");
-console.log(command);
-console.log(query);
 
 if (command === "spotify-this") {
     console.log("running-spotify");
@@ -24,14 +20,25 @@ if (command === "spotify-this") {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-
-        console.log(data.tracks.items[0].album.artists);
+        console.log("----");
+        console.log(data.tracks.items[0].artists[0].name);
+        console.log(data.tracks.items[0].name);
+        console.log(data.tracks.items[0].album.name);
+        console.log(data.tracks.items[0].album.external_urls.spotify);
+        console.log("----");
     });
 } else if (command === "concert-this") {
     console.log("running-concert");
-    queryURL("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp")
+    axios.get("https://rest.bandsintown.com/artists/" + query + "/events?app_id=codingbootcamp")
         .then(function (response) {
-            console.log(response.data);
+            var concerts = response.data;
+            for (var i = 0; i < concerts.length; i++) {
+                console.log("----");
+                console.log(concerts[i].venue.name);
+                console.log(concerts[i].venue.city);
+                console.log(concerts[i].datetime);
+                console.log("----");
+            }
         })
         .catch(function (error) {
             console.log(error);
@@ -40,34 +47,34 @@ if (command === "spotify-this") {
 } else if (command === "movie-this") {
     axios.get('http://www.omdbapi.com/?apikey=trilogy&t=' + query)
         .then(function (response) {
+            // console.log(response.data);
             console.log(response.data);
         })
         .catch(function (error) {
             console.log(error);
         });
-    console.log("running-movie");
+    // console.log("running-movie");
 
-} else (command === "do-what-it-says") {
+} else if (command === "do-what-it-says") {
     fs.readFile("random.txt", "utf8", function (err, data) {
         if (err) {
             return console.log(err);
         }
-    }
+        console.log(data.split(","));
+        var randomtextarray = data.split(",");
+        var command = randomtextarray[0];
+        var search = randomtextarray[1];
+
+        console.log(command);
+        console.log(search);
+    })
+    // console.log(process.argv);
+}
 
 
 
 
 
-console.log(process.argv);
 
 
-
-
-// `concert-this`
-
-//     `spotify-this-song`
-
-//     `movie-this`
-
-//     `do-what-it-says`
 
